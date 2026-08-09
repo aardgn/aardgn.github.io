@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autonomous AI Ecosystem — Arda Gün</title>
-    <!-- Google Fonts import -->
+    <title>Multi-Agent Survival Simulation — Arda Gün</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Değişkenleri: Renk paletini burada tanımlıyoruz */
         :root {
             --bg-color: #FAFAF8;
             --text-dark: #1A1A1A;
             --accent-green: #2D7D6F;
+            --neutral-divider: #E5E5E0;
+            --text-gray: #555555;
         }
 
         body {
@@ -32,7 +32,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 2rem 5%;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid var(--neutral-divider);
         }
 
         .nav-brand {
@@ -57,10 +57,43 @@
             padding: 0 5%;
         }
 
-        .project-item {
-            border-left: 4px solid var(--accent-green);
-            padding-left: 1.5rem;
+        .case-title {
+            font-size: 2.5rem;
             margin-bottom: 3rem;
+            line-height: 1.2;
+        }
+
+        .case-section {
+            margin-bottom: 3rem;
+        }
+
+        .case-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .project-image {
+            width: 100%;
+            height: auto;
+            border: 1px solid var(--neutral-divider);
+            margin: 2rem 0 0.5rem 0;
+            border-radius: 4px;
+        }
+
+        .image-caption {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .footer-cta {
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--neutral-divider);
+            text-align: center;
         }
 
         .project-link {
@@ -77,21 +110,40 @@
         <nav class="nav-links">
             <a href="index.html">Home</a>
             <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
         </nav>
     </header>
 
     <main>
-        <h1>Autonomous AI Ecosystem</h1>
-        <p><strong>Tech Stack:</strong> Python, Flask, Chart.js</p>
+        <h1 class="case-title">Multi-Agent Survival Simulation — Why Agents Didn't Talk</h1>
         
-        <h2>The Challenge</h2>
-        <p>Tracking custom agent generation types, mutations, and family lineages in a live simulation required a robust backend and a dynamic frontend capable of real-time updates.</p>
+        <div class="case-section">
+            <h2>The Problem</h2>
+            <p>I wanted to test something more open-ended than a typical project: would LLM-driven agents develop meaningful communication or cooperation on their own, the way OpenAI's hide-and-seek agents discovered tool use without being explicitly programmed for it? I built a real-time survival simulation where autonomous agents, each run by an LLM, had to manage limited resources and could optionally signal to nearby agents. I gave them the capability. I didn't know if they'd use it.</p>
+        </div>
 
-        <h2>The Build</h2>
-        <p>I designed the backend using Flask to handle the simulation logic state, passing data to a Chart.js dashboard. (Buraya GitHub reponun linkini veya projeden bir ekran görüntüsünü ekleyeceksin).</p>
-        
-        <br>
-        <a href="https://github.com/aardgn/survivor_ai" class="project-link">View on GitHub ↗</a>
+        <div class="case-section">
+            <h2>What I Did (and What I Decided)</h2>
+            <p>They mostly didn't. Agents rarely signaled at all, and when they did, the signals carried no consistent meaning and drew no reliable response from other agents. My first instinct was to treat this as a bug — check the code, check the prompt, assume I'd wired something wrong. It wasn't a bug.</p>
+            <p>I traced it to a structural gap: LLM-driven agents can produce fluent, plausible-sounding text, but fluency isn't the same as a reason to communicate. In OpenAI's hide-and-seek work, cooperative behavior emerged because agents were trained with reinforcement learning — millions of trials where useful behavior was directly rewarded. My agents had no comparable reward signal tied to signaling. Nothing made a "successful" signal more likely to happen again, so communication stayed random and unreinforced.</p>
+            <p>Alongside this, I also had to solve real infrastructure problems to keep the simulation running at all — a hybrid fallback so agents wouldn't die from LLM latency, graceful degradation for API rate limits, RAG-backed memory to stay inside the context window, and thread-safe locks to prevent race conditions in the physics engine — but the communication result is the one I actually set out to test.</p>
+            
+            <img src="248ecaa9-c752-4731-9df6-5879a13777fe-Ekran-Resmi-2026-07-24-12.57.10.png" alt="Simulation Turn 5 Log Excerpt" class="project-image">
+            <p class="image-caption">Real log entry from turn 5 of the simulation, translated from the original Turkish for readability. Dusk addresses 'Kael' — an agent not present on the map at this point, a hallucination rather than a signaling bug. Seren and Oryn produce the identical 'foggy mind' fallback thought seconds apart, right after hitting the LLM API rate limit — this is the deterministic fallback mechanism reusing a default low-energy thought instead of generating a fresh one.</p>
+        </div>
+
+        <div class="case-section">
+            <h2>What Came Of It</h2>
+            <p>I didn't get emergent communication, and I'm treating that as a real finding, not a failed feature. It's pointing me toward the next version of this simulation: one built on a genetic algorithm instead of LLM calls, where signaling carries a direct energy cost and a direct energy reward — a much smaller feedback loop than an LLM, but a real one, with no dependency on external APIs. The infrastructure work taught me how to keep a live multi-agent system from falling over. The communication result taught me the difference between a system that sounds intelligent and one that's actually under selective pressure to behave that way.</p>
+            
+            <br>
+            <a href="https://github.com/aardgn/survivor_ai" class="project-link" target="_blank">View Repository ↗</a>
+        </div>
+
+        <div class="footer-cta">
+            <h2 style="margin-bottom: 0.5rem;">Let's build something.</h2>
+            <a href="mailto:ardagun@example.com" class="project-link" style="font-size: 1.2rem;">Email me ↗</a>
+        </div>
     </main>
 
 </body>
