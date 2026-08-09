@@ -7,11 +7,11 @@
     <!-- Google Fonts import -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Değişkenleri: Renk paletini burada tanımlıyoruz */
         :root {
             --bg-color: #FAFAF8;
             --text-dark: #1A1A1A;
             --accent-green: #2D7D6F;
+            --text-gray: #555555;
         }
 
         body {
@@ -27,7 +27,6 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Navigasyon için Flexbox: Öğeleri yan yana ve aralıklı dizer */
         header {
             display: flex;
             justify-content: space-between;
@@ -58,6 +57,18 @@
             padding: 0 5%;
         }
 
+        .hero-claim {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .bio-text {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 4rem;
+        }
+
         .project-item {
             border-left: 4px solid var(--accent-green);
             padding-left: 1.5rem;
@@ -69,6 +80,13 @@
             text-decoration: none;
             font-weight: 600;
         }
+
+        .footer-cta {
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -78,25 +96,36 @@
         <nav class="nav-links">
             <a href="index.html">Home</a>
             <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
         </nav>
     </header>
 
     <main>
-        <h1>Building.</h1>
-        <p>I focus on scripting, dataset cleaning, optimizing classification models, and building backend APIs.</p>
+        <!-- Sitemap: Hero Section & Bio -->
+        <h1 class="hero-claim">I build LLM-based products, from architecture down to what keeps them from breaking.</h1>
+        <p class="bio-text">Data Science student at Istanbul Technical University. I focus on scripting, dataset cleaning, optimizing classification models, and building backend APIs.</p>
 
         <h2>Selected Work</h2>
         
+        <!-- Sitemap: Case 1 Preview -->
         <div class="project-item">
             <h3>Autonomous AI Ecosystem (Survivor AI)</h3>
-            <p>A simulation project running on a Flask backend with a Chart.js frontend dashboard to track custom agent mutations and family lineages in real time.</p>
+            <p>A multi-agent architecture exploring emergent communication. Includes infrastructure fixes for fallback mechanisms, RAG, and thread-safety.</p>
             <a href="survivor-ai.html" class="project-link">View Project Details →</a>
         </div>
 
+        <!-- Sitemap: Case 2 Preview -->
         <div class="project-item">
             <h3>FlyRank To-Do CRUD API</h3>
-            <p>FastAPI application configured with Docker Compose and a Postgres database, developed for the FlyRank Backend AI Engineering Cohort.</p>
+            <p>FastAPI build configured with Docker and Postgres. Features an AI vs. manual debugging comparison focusing on a PUT/DELETE status-code bug.</p>
             <a href="flyrank-api.html" class="project-link">View Project Details →</a>
+        </div>
+
+        <!-- Sitemap: Footer CTA -->
+        <div class="footer-cta">
+            <h2 style="margin-bottom: 0.5rem;">Let's build something.</h2>
+            <!-- href "mailto:" kısmına kendi mail adresini yazmalısın -->
+            <a href="mailto:ardagun@example.com" class="project-link" style="font-size: 1.2rem;">Email me ↗</a>
         </div>
     </main>
 
