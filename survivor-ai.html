@@ -128,7 +128,7 @@
             <p>I traced it to a structural gap: LLM-driven agents can produce fluent, plausible-sounding text, but fluency isn't the same as a reason to communicate. In OpenAI's hide-and-seek work, cooperative behavior emerged because agents were trained with reinforcement learning — millions of trials where useful behavior was directly rewarded. My agents had no comparable reward signal tied to signaling. Nothing made a "successful" signal more likely to happen again, so communication stayed random and unreinforced.</p>
             <p>Alongside this, I also had to solve real infrastructure problems to keep the simulation running at all — a hybrid fallback so agents wouldn't die from LLM latency, graceful degradation for API rate limits, RAG-backed memory to stay inside the context window, and thread-safe locks to prevent race conditions in the physics engine — but the communication result is the one I actually set out to test.</p>
             
-            <img src="248ecaa9-c752-4731-9df6-5879a13777fe-Ekran-Resmi-2026-07-24-12.57.10.png" alt="Simulation Turn 5 Log Excerpt" class="project-image">
+            <img src="survivor-log.png" alt="Simulation Turn 5 Log Excerpt" class="project-image">
             <p class="image-caption">Real log entry from turn 5 of the simulation, translated from the original Turkish for readability. Dusk addresses 'Kael' — an agent not present on the map at this point, a hallucination rather than a signaling bug. Seren and Oryn produce the identical 'foggy mind' fallback thought seconds apart, right after hitting the LLM API rate limit — this is the deterministic fallback mechanism reusing a default low-energy thought instead of generating a fresh one.</p>
         </div>
 
