@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Management CRUD API — Arda Gün</title>
+    <title>MedBrain AI — Arda Gün</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -115,30 +115,31 @@
     </header>
 
     <main>
-        <h1 class="case-title">Task Management CRUD API</h1>
+        <h1 class="case-title">MedBrain AI: Escaping the Localhost Illusion</h1>
         
         <div class="case-section">
             <h2>The Problem</h2>
-            <p>I wanted to build my first real backend — not a tutorial clone, something I'd actually have to debug. Before this, backend concepts like "request," "response," and "endpoint" were abstract to me; I could recite the definitions but they didn't connect to anything concrete in my head. I needed the fundamentals of how a server actually works, because whether I end up employed or building my own product, that gap doesn't stay optional for long.</p>
+            <p>I built an AI-powered flashcard application that extracts raw data from PDFs using Gemini 1.5 Flash and schedules them using a spaced repetition algorithm. Locally, it was flawless. I deployed it to Streamlit Community Cloud, users logged in, uploaded notes, and started studying. The next day, the server rebooted, and every single flashcard was permanently gone.</p>
         </div>
 
         <div class="case-section">
             <h2>What I Did (and What I Decided)</h2>
-            <p>I built a five-endpoint CRUD API in Python with FastAPI — create, read, update, and delete tasks, backed by in-memory storage, documented through Swagger UI. I wrote every endpoint by hand before touching AI-generated code, because I wanted to actually own the decisions: which status code belongs where, what counts as a client error versus a missing resource, how validation should fail.</p>
+            <p>I had fallen into the classic trap of ephemeral containers. I was using a local SQLite database (`db.sqlite3`) which gets wiped every time a cloud container spins down. "Works on my machine" didn't translate to the cloud.</p>
+            <p>Instead of patching it with hacky CSV exports, I rebuilt the data architecture. I migrated the entire system to a cloud-native PostgreSQL instance via Supabase. While doing this, I realized the app was fundamentally single-tenant: if two people used it, they were writing to the same database tables and ruining each other's spaced repetition intervals.</p>
+            <p>I redesigned the schema to include a multi-tenant structure, isolating user sessions state and ensuring database queries were strictly bound to unique user identifiers.</p>
             
-            <img src="crud-api.png" alt="Swagger UI documentation for the CRUD API" class="project-image">
-            <p class="image-caption">The generated Swagger UI documenting the five endpoints, providing a visual interface for the FastAPI backend.</p>
+            <!-- BURAYA MEDBRAIN UYGULAMANDAN GÜZEL BİR EKRAN GÖRÜNTÜSÜ EKLE -->
+            <img src="medbrain-app.png" alt="MedBrain UI showing extracted flashcards" class="project-image">
+            <p class="image-caption">The MedBrain interface after migrating to Supabase, successfully isolating a specific user's spaced repetition session.</p>
             
-            <p>That decision paid off in an unplanned way. While reviewing my own <code>PUT</code> and <code>DELETE</code> endpoints, I found that both returned the wrong status code when a task wasn't found — <code>PUT</code> returned 400 instead of 404, and <code>DELETE</code> returned 204 (success) instead of 404 for a request that should have failed. I hadn't done this as an exercise; it was a real bug I introduced myself and then had to catch. Tracing why 404 belongs to "the resource doesn't exist" and 400 belongs to "you sent me something invalid" is what finally made those concepts click — not the definition, but the mistake.</p>
-            <p>I closed the loop by prompting an AI to build the same API from a written spec, then diffing its output against my own. The AI added a <code>response_model</code> layer I hadn't thought to include, and it silently followed a mistake still sitting in my prompt (it applied 404 to a bad-input case that should have been 400) instead of catching it — proof that a prompt is only as reliable as the person who understood the system well enough to write it correctly.</p>
         </div>
 
         <div class="case-section">
             <h2>What Came Of It</h2>
-            <p>I can now look at a status code and know exactly why it's wrong before someone else points it out. That's the real outcome — not the five working endpoints, but being able to read my own errors and correct them without needing an explanation of the underlying concept every time. I think that's mostly how real learning works: you don't understand a system by being told how it works, you understand it by breaking it and finding out why.</p>
+            <p>The app no longer loses data, and multiple people can use it simultaneously without corrupting the state. More importantly, I learned the hard boundary between writing a script and architecting a reliable system. A multimodal AI that reads PDFs is an impressive feature, but it's useless if the underlying database architecture can't survive a server reboot.</p>
             
             <br>
-            <a href="https://github.com/aardgn/flyrank_api" class="project-link" target="_blank">View Repository ↗</a>
+            <a href="https://github.com/aardgn/med-brain" class="project-link" target="_blank">View Repository ↗</a>
         </div>
 
         <div class="footer-cta">
