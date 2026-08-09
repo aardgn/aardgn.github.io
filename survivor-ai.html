@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous AI Ecosystem — Arda Gün</title>
+    <!-- Google Fonts import -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Değişkenleri: Renk paletini burada tanımlıyoruz */
+        :root {
+            --bg-color: #FAFAF8;
+            --text-dark: #1A1A1A;
+            --accent-green: #2D7D6F;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3, .nav-brand, .nav-links a {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 5%;
+        }
+
+        .project-item {
+            border-left: 4px solid var(--accent-green);
+            padding-left: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-link {
+            color: var(--accent-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-brand">Arda Gün</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projects.html">Projects</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Autonomous AI Ecosystem</h1>
+        <p><strong>Tech Stack:</strong> Python, Flask, Chart.js</p>
+        
+        <h2>The Challenge</h2>
+        <p>Tracking custom agent generation types, mutations, and family lineages in a live simulation required a robust backend and a dynamic frontend capable of real-time updates.</p>
+
+        <h2>The Build</h2>
+        <p>I designed the backend using Flask to handle the simulation logic state, passing data to a Chart.js dashboard. (Buraya GitHub reponun linkini veya projeden bir ekran görüntüsünü ekleyeceksin).</p>
+        
+        <br>
+        <a href="https://github.com/aardgn/survivor_ai" class="project-link">View on GitHub ↗</a>
+    </main>
+
+</body>
+</html>
