@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management CRUD API — Arda Gün</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FAFAF8;
+            --text-dark: #1A1A1A;
+            --accent-green: #2D7D6F;
+            --neutral-divider: #E5E5E0;
+            --text-gray: #555555;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3, .nav-brand, .nav-links a {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            border-bottom: 1px solid var(--neutral-divider);
+        }
+
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 5%;
+        }
+
+        .case-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            line-height: 1.2;
+        }
+
+        .case-section {
+            margin-bottom: 3rem;
+        }
+
+        .case-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .project-image {
+            width: 100%;
+            height: auto;
+            border: 1px solid var(--neutral-divider);
+            margin: 2rem 0 0.5rem 0;
+            border-radius: 4px;
+        }
+
+        .image-caption {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .footer-cta {
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--neutral-divider);
+            text-align: center;
+        }
+
+        .project-link {
+            color: var(--accent-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-brand">Arda Gün</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="case-title">Task Management CRUD API</h1>
+        
+        <div class="case-section">
+            <h2>The Problem</h2>
+            <p>I wanted to build my first real backend — not a tutorial clone, something I'd actually have to debug. Before this, backend concepts like "request," "response," and "endpoint" were abstract to me; I could recite the definitions but they didn't connect to anything concrete in my head. I needed the fundamentals of how a server actually works, because whether I end up employed or building my own product, that gap doesn't stay optional for long.</p>
+        </div>
+
+        <div class="case-section">
+            <h2>What I Did (and What I Decided)</h2>
+            <p>I built a five-endpoint CRUD API in Python with FastAPI — create, read, update, and delete tasks, backed by in-memory storage, documented through Swagger UI. I wrote every endpoint by hand before touching AI-generated code, because I wanted to actually own the decisions: which status code belongs where, what counts as a client error versus a missing resource, how validation should fail.</p>
+            
+            <img src="crud-api.png" alt="Swagger UI documentation for the CRUD API" class="project-image">
+            <p class="image-caption">The generated Swagger UI documenting the five endpoints, providing a visual interface for the FastAPI backend.</p>
+            
+            <p>That decision paid off in an unplanned way. While reviewing my own <code>PUT</code> and <code>DELETE</code> endpoints, I found that both returned the wrong status code when a task wasn't found — <code>PUT</code> returned 400 instead of 404, and <code>DELETE</code> returned 204 (success) instead of 404 for a request that should have failed. I hadn't done this as an exercise; it was a real bug I introduced myself and then had to catch. Tracing why 404 belongs to "the resource doesn't exist" and 400 belongs to "you sent me something invalid" is what finally made those concepts click — not the definition, but the mistake.</p>
+            <p>I closed the loop by prompting an AI to build the same API from a written spec, then diffing its output against my own. The AI added a <code>response_model</code> layer I hadn't thought to include, and it silently followed a mistake still sitting in my prompt (it applied 404 to a bad-input case that should have been 400) instead of catching it — proof that a prompt is only as reliable as the person who understood the system well enough to write it correctly.</p>
+        </div>
+
+        <div class="case-section">
+            <h2>What Came Of It</h2>
+            <p>I can now look at a status code and know exactly why it's wrong before someone else points it out. That's the real outcome — not the five working endpoints, but being able to read my own errors and correct them without needing an explanation of the underlying concept every time. I think that's mostly how real learning works: you don't understand a system by being told how it works, you understand it by breaking it and finding out why.</p>
+            
+            <br>
+            <a href="https://github.com/aardgn/flyrank_api" class="project-link" target="_blank">View Repository ↗</a>
+        </div>
+
+        <div class="footer-cta">
+            <h2 style="margin-bottom: 0.5rem;">Let's build something.</h2>
+            <a href="mailto:ardagun@example.com" class="project-link" style="font-size: 1.2rem;">Email me ↗</a>
+        </div>
+    </main>
+
+</body>
+</html>
