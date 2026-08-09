@@ -1,31 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arda Gün</title>
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #FAFAF8;
-    font-family: 'Inter', Arial, sans-serif;
-  }
-  h1 {
-    font-family: 'JetBrains Mono', monospace;
-    color: #1A1A1A;
-    font-size: 2rem;
-    text-align: center;
-  }
-  span {
-    color: #2D7D6F;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arda Gün — Portfolio</title>
+    <!-- Google Fonts import -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Değişkenleri: Renk paletini burada tanımlıyoruz */
+        :root {
+            --bg-color: #FAFAF8;
+            --text-dark: #1A1A1A;
+            --accent-green: #2D7D6F;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3, .nav-brand, .nav-links a {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Navigasyon için Flexbox: Öğeleri yan yana ve aralıklı dizer */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 5%;
+        }
+
+        .project-item {
+            border-left: 4px solid var(--accent-green);
+            padding-left: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-link {
+            color: var(--accent-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
-  <h1>Arda Gün <span>— building.</span></h1>
+
+    <header>
+        <div class="nav-brand">Arda Gün</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projects.html">Projects</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Building.</h1>
+        <p>I focus on scripting, dataset cleaning, optimizing classification models, and building backend APIs.</p>
+
+        <h2>Selected Work</h2>
+        
+        <div class="project-item">
+            <h3>Autonomous AI Ecosystem (Survivor AI)</h3>
+            <p>A simulation project running on a Flask backend with a Chart.js frontend dashboard to track custom agent mutations and family lineages in real time.</p>
+            <a href="survivor-ai.html" class="project-link">View Project Details →</a>
+        </div>
+
+        <div class="project-item">
+            <h3>FlyRank To-Do CRUD API</h3>
+            <p>FastAPI application configured with Docker Compose and a Postgres database, developed for the FlyRank Backend AI Engineering Cohort.</p>
+            <a href="flyrank-api.html" class="project-link">View Project Details →</a>
+        </div>
+    </main>
+
 </body>
 </html>
